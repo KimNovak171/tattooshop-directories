@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { FacilityCard } from "@/components/FacilityCard";
-import { getCanadaDirectoryIndex } from "@/lib/canadaFacilities";
+import {
+  getCanadaDirectoryIndex,
+  getCanadaNationwideStats,
+} from "@/lib/canadaFacilities";
 import { getDirectoryIndex, getStateSummary, getGlobalStats } from "@/lib/stateFacilities";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -46,6 +49,7 @@ export default async function Home() {
     usDirectory.map((s) => getStateSummary(s.stateSlug)),
   );
   const globalStats = getGlobalStats();
+  const canadaNationwide = getCanadaNationwideStats();
 
   const breadcrumbSchema = {
     "@context": "https://schema.org",
@@ -186,7 +190,13 @@ export default async function Home() {
       </p>
 
       <section className="mt-8 border-y-2 border-teal/30 bg-surface">
-        <div className="mx-auto grid max-w-6xl gap-4 px-4 py-8 sm:grid-cols-2 sm:px-6 lg:grid-cols-4 lg:px-8">
+        <div
+          className={`mx-auto grid max-w-6xl gap-4 px-4 py-8 sm:grid-cols-2 sm:px-6 lg:px-8 ${
+            canadaNationwide.totalFacilities > 0
+              ? "lg:grid-cols-5"
+              : "lg:grid-cols-4"
+          }`}
+        >
           <div className="rounded-xl border-2 border-teal/30 bg-surface p-4 text-center shadow-sm">
             <p className="text-xs font-semibold uppercase tracking-wide text-teal">
               Verified urology practices
@@ -194,7 +204,26 @@ export default async function Home() {
             <p className="mt-2 text-2xl font-semibold text-foreground">
               {globalStats.totalFacilities.toLocaleString()}
             </p>
+            {canadaNationwide.totalFacilities > 0 && (
+              <p className="mt-1 text-xs text-foreground/70">
+                US + Canada combined
+              </p>
+            )}
           </div>
+          {canadaNationwide.totalFacilities > 0 && (
+            <div className="rounded-xl border-2 border-teal/30 bg-surface p-4 text-center shadow-sm">
+              <p className="text-xs font-semibold uppercase tracking-wide text-teal">
+                Canadian practices
+              </p>
+              <p className="mt-2 text-2xl font-semibold text-foreground">
+                {canadaNationwide.totalFacilities.toLocaleString()}
+              </p>
+              <p className="mt-1 text-xs text-foreground/70">
+                {canadaNationwide.provinceCount.toLocaleString()} provinces
+                &amp; territories
+              </p>
+            </div>
+          )}
           <div className="rounded-xl border-2 border-teal/30 bg-surface p-4 text-center shadow-sm">
             <p className="text-xs font-semibold uppercase tracking-wide text-teal">
               Cities Covered

@@ -8,8 +8,8 @@ import path from "path";
  * loads each in one batch (`readFileSync` + try/catch → [] per file).
  * Maps URLs (CRITICAL):
  * - With non-empty `place_id`: `https://www.google.com/maps/place/?q=place_id:{place_id}`
- *   (`q` is URI-encoded, e.g. `place_id%3AChIJ...`).
- * - Otherwise: `https://www.google.com/maps/search/?api=1&query={encoded_address}`.
+ *   (full `q` value is URI-encoded).
+ * - If `place_id` is missing or empty: `https://www.google.com/maps/search/?api=1&query={encoded_address}`.
  *
  * All 13 province/territory slugs below are loaded from `data/{slug}_facilities.json` when present
  * (`discoverCanadaProvinceSlugsFromData` + `readFileSync` + try/catch → [] per file).
