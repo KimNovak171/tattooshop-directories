@@ -12,11 +12,11 @@ export function generateMetadata({
   const regionCode = params.region.toUpperCase();
 
   return {
-    title: `Urologists in ${regionCode}`,
-    description: `Explore urologist and urology clinic options in ${regionCode} with UrologistDirectories.com.`,
+    title: `Hair salons in ${regionCode}`,
+    description: `Explore hair salon and beauty options in ${regionCode} with HairSalonDirectories.com.`,
     openGraph: {
-      title: `Urologists in ${regionCode} | UrologistDirectories.com`,
-      description: `Browse urology practices and services in ${regionCode}.`,
+      title: `Hair salons in ${regionCode} | HairSalonDirectories.com`,
+      description: `Browse salons and stylists in ${regionCode}.`,
       url: `/locations/${params.region}`,
       type: "website",
     },
@@ -30,19 +30,19 @@ export default function RegionPage({ params }: RegionPageProps) {
     <main className="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
       <div className="space-y-4">
         <p className="text-sm font-medium uppercase tracking-[0.2em] text-teal">
-          Urologists by Region
+          Salons by region
         </p>
         <h1 className="text-3xl font-semibold text-navy">
-          Urology practices in {regionCode}
+          Hair salons in {regionCode}
         </h1>
         <p className="max-w-2xl text-sm text-slate-600">
           This is a placeholder view for{" "}
           <span className="font-semibold">{regionCode}</span>. Here you&apos;ll
-          be able to browse urologists and urology clinics in this state or
+          be able to browse hair salons and stylists in this state or
           province.
         </p>
         <div className="mt-6 rounded-xl border border-surface-muted bg-surface px-4 py-6 text-sm text-slate-500">
-          Practice data will be loaded from your data model. This template
+          Listing data will be loaded from your data model. This template
           ships with an empty `data/` folder (no JSON files).
           <code className="rounded bg-surface-muted px-1 py-0.5 text-xs">
             /data

@@ -2,19 +2,19 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | Urologist Directories",
+  title: "Privacy Policy | Hair Salon Directories",
   description:
-    "Privacy policy for UrologistDirectories.com. How we collect, use, and protect your information when you use our urologist directory.",
+    "Privacy policy for HairSalonDirectories.com. How we collect, use, and protect your information when you use our hair salon directory.",
   alternates: {
     canonical: "/privacy",
     languages: {
-      "en-us": "https://urologistdirectories.com/privacy",
+      "en-us": "https://hairsalondirectories.com/privacy",
     },
   },
   openGraph: {
-    title: "Privacy Policy | Urologist Directories",
+    title: "Privacy Policy | Hair Salon Directories",
     url: "/privacy",
-    siteName: "UrologistDirectories.com",
+    siteName: "HairSalonDirectories.com",
     type: "website",
   },
 };
@@ -38,7 +38,7 @@ export default function PrivacyPage() {
         <section className="space-y-4 text-sm text-slate-700">
           <h2 className="text-lg font-semibold text-navy">1. Introduction</h2>
           <p>
-            UrologistDirectories.com (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot;) operates a directory website that helps patients find and compare urologists and urology practices across the United States and Canada. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website.
+            HairSalonDirectories.com (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot;) operates a directory website that helps clients find and compare hair salons and beauty businesses across the United States and Canada. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website.
           </p>
 
           <h2 className="text-lg font-semibold text-navy">2. Information We Collect</h2>
@@ -53,7 +53,7 @@ export default function PrivacyPage() {
 
           <h2 className="text-lg font-semibold text-navy">4. Directory Listings and Public Information</h2>
           <p>
-            Our directory displays information about urology practices that we obtain from public sources (such as Google Maps) or that is provided by practice owners. Listing details (e.g., name, address, phone, website) are shown to help users compare options. If you are a practice owner and wish to update or remove your listing, contact us at hello@directoriesnetwork.com.
+            Our directory displays information about salons that we obtain from public sources (such as Google Maps) or that is provided by business owners. Listing details (e.g., name, address, phone, website) are shown to help users compare options. If you are a salon owner and wish to update or remove your listing, contact us at hello@directoriesnetwork.com.
           </p>
 
           <h2 className="text-lg font-semibold text-navy">5. Cookies and Tracking</h2>
@@ -63,7 +63,7 @@ export default function PrivacyPage() {
 
           <h2 className="text-lg font-semibold text-navy">6. Third-Party Links and Services</h2>
           <p>
-            Our site may contain links to third-party websites (e.g., practice websites, Google Maps, payment processors). We are not responsible for the privacy practices of those sites. We encourage you to read their privacy policies.
+            Our site may contain links to third-party websites (e.g., salon websites, Google Maps, payment processors). We are not responsible for the privacy practices of those sites. We encourage you to read their privacy policies.
           </p>
 
           <h2 className="text-lg font-semibold text-navy">7. Data Security</h2>

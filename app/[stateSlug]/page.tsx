@@ -7,8 +7,12 @@ import {
   getStateResourcesUrl,
   getStateSummary,
 } from "@/lib/stateFacilities";
+import {
+  DEFAULT_SALON_CARE_TYPES_SENTENCE,
+  salonCategorySchemaThings,
+} from "@/lib/careTypesProse";
 
-const siteUrl = "https://urologistdirectories.com";
+const siteUrl = "https://hairsalondirectories.com";
 
 type StatePageProps = {
   params: Promise<{ stateSlug: string }>;
@@ -25,9 +29,9 @@ export async function generateMetadata({
 
   const { stateName, totalFacilities, cities } = await getStateSummary(safeSlug);
 
-  const title = `Urologists in ${stateName} | ${totalFacilities.toLocaleString()} Verified Practices | UrologistDirectories.com`;
+  const title = `Hair Salons in ${stateName} | ${totalFacilities.toLocaleString()} Verified Listings | HairSalonDirectories.com`;
 
-  const descriptor = `Browse ${totalFacilities.toLocaleString()} verified urology practices across ${cities.length.toLocaleString()} ${stateName} cities. Find urologists and urology clinics — all rated 3 stars or higher on Google Maps.`;
+  const descriptor = `Browse ${totalFacilities.toLocaleString()} verified hair salons across ${cities.length.toLocaleString()} ${stateName} cities. Find stylists and beauty salons — all rated 3 stars or higher on Google Maps.`;
 
   return {
     title,
@@ -42,14 +46,14 @@ export async function generateMetadata({
       title,
       description: descriptor,
       url: canonicalPath,
-      siteName: "UrologistDirectories.com",
+      siteName: "HairSalonDirectories.com",
       type: "website",
       images: [
         {
           url: "/og-image.svg",
           width: 1200,
           height: 630,
-          alt: `${stateName} urologist directory preview`,
+          alt: `${stateName} hair salon directory preview`,
         },
       ],
     },
@@ -73,8 +77,8 @@ export default async function StatePage({ params }: StatePageProps) {
     careTypes,
   } = await getStateSummary(stateSlug ?? "");
   const resourcesUrl = getStateResourcesUrl(resolvedStateSlug);
-  const urologyFocusText =
-    "urologists, pediatric urologists, urological surgeons, and urology clinic care";
+  const salonFocusText =
+    "hair salons, beauty salons, hairdressers, extension technicians, replacement services, locticians, and hair care";
   const majorCities = [...cities]
     .sort((a, b) => b.facilityCount - a.facilityCount)
     .slice(0, 6)
@@ -86,7 +90,7 @@ export default async function StatePage({ params }: StatePageProps) {
   const careTypesSentence =
     topCareTypes.length > 0
       ? topCareTypes.join(", ")
-      : "urologists, pediatric urologists, urological surgeons, urology clinics";
+      : DEFAULT_SALON_CARE_TYPES_SENTENCE;
 
   const breadcrumbSchema = {
     "@context": "https://schema.org",
@@ -95,7 +99,7 @@ export default async function StatePage({ params }: StatePageProps) {
       {
         "@type": "ListItem",
         position: 1,
-        name: "UrologistDirectories.com",
+        name: "HairSalonDirectories.com",
         item: `${siteUrl}/`,
       },
       {
@@ -113,7 +117,7 @@ export default async function StatePage({ params }: StatePageProps) {
     mainEntity: [
       {
         "@type": "Question",
-        name: `How many urology practices are in ${stateName}?`,
+        name: `How many hair salons are in ${stateName}?`,
         acceptedAnswer: {
           "@type": "Answer",
           text: `Our directory lists ${totalFacilities.toLocaleString()} verified facilities across ${cities.length.toLocaleString()} cities.`,
@@ -121,7 +125,7 @@ export default async function StatePage({ params }: StatePageProps) {
       },
       {
         "@type": "Question",
-        name: `What types of urology services are available in ${stateName}?`,
+        name: `What types of hair salon services are available in ${stateName}?`,
         acceptedAnswer: {
           "@type": "Answer",
           text: `${careTypesSentence}.`,
@@ -129,10 +133,10 @@ export default async function StatePage({ params }: StatePageProps) {
       },
       {
         "@type": "Question",
-        name: "How are clinics selected for this directory?",
+        name: "How are salons selected for this directory?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "All clinics are sourced from Google Maps, verified, and must have a minimum 3-star rating.",
+          text: "All listings are sourced from Google Maps, verified, and must have a minimum 3-star rating.",
         },
       },
     ],
@@ -141,34 +145,19 @@ export default async function StatePage({ params }: StatePageProps) {
   const webpageSchema = {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    name: `Urologists in ${stateName}`,
+    name: `Hair Salons in ${stateName}`,
     url: `${siteUrl}/${resolvedStateSlug}`,
     isPartOf: {
       "@type": "WebSite",
-      name: "UrologistDirectories.com",
+      name: "HairSalonDirectories.com",
       url: `${siteUrl}/`,
     },
     about: [
       {
         "@type": "Thing",
-        name: `${stateName} urology practices`,
+        name: `${stateName} hair salons`,
       },
-      {
-        "@type": "Thing",
-        name: "General urology",
-      },
-      {
-        "@type": "Thing",
-        name: "Pediatric urology",
-      },
-      {
-        "@type": "Thing",
-        name: "Urological surgery",
-      },
-      {
-        "@type": "Thing",
-        name: "Urology clinics",
-      },
+      ...salonCategorySchemaThings(),
     ],
     speakable: {
       "@type": "SpeakableSpecification",
@@ -203,18 +192,18 @@ export default async function StatePage({ params }: StatePageProps) {
         className="mb-4 flex items-center justify-center gap-2 rounded-full bg-teal px-5 py-3 text-center text-sm font-semibold text-white shadow-md transition hover:bg-teal-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal focus-visible:ring-offset-2"
         aria-label="View featured listing pricing and benefits"
       >
-        Get your practice featured — view pricing &amp; benefits →
+        Get your salon featured — view pricing &amp; benefits →
       </Link>
       <section className="rounded-2xl bg-surface-muted px-5 py-6 text-foreground shadow-lg shadow-navy/10 ring-1 ring-gold/40 sm:px-8 sm:py-8">
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold-soft">
           State overview
         </p>
         <h1 className="mt-2 text-3xl font-semibold sm:text-4xl">
-          Urologists in {stateName}
+          Hair Salons in {stateName}
         </h1>
         <p className="mt-3 max-w-2xl text-sm text-foreground/80">
-          Explore {urologyFocusText} across {stateName}, including major city
-          areas such as {majorCitiesText}. Use this page to find urology practices by city,
+          Explore {salonFocusText} across {stateName}, including major city
+          areas such as {majorCitiesText}. Use this page to find salons by city,
           then review{" "}
           <a
             href={resourcesUrl}
@@ -222,15 +211,15 @@ export default async function StatePage({ params }: StatePageProps) {
             rel="noopener noreferrer"
             className="underline underline-offset-2 hover:text-gold-soft"
           >
-            American Urological Association (AUA) resources
+            Professional Beauty Association (PBA) resources
           </a>{" "}
-          for understanding board certification, patient education, and how to choose a urologist.
+          for industry education, licensing context, and how to choose a salon or stylist.
         </p>
 
         <div className="mt-5 grid gap-4 text-sm sm:grid-cols-3">
           <div className="rounded-xl bg-surface p-4 ring-1 ring-navy/10">
             <p className="text-xs font-semibold uppercase tracking-wide text-gold-soft">
-              Practices listed
+              Salons listed
             </p>
             <p className="mt-1 text-2xl font-semibold">
               {totalFacilities.toLocaleString()}
@@ -269,7 +258,7 @@ export default async function StatePage({ params }: StatePageProps) {
               Top Picks in {stateName}
             </h2>
             <p className="text-sm text-slate-600">
-              Featured communities in {stateName} — verified listings with priority placement.
+              Featured salons in {stateName} — verified listings with priority placement.
             </p>
             <div className="mt-4 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
               {featuredFacilities.map((facility) => (
@@ -284,11 +273,11 @@ export default async function StatePage({ params }: StatePageProps) {
         <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <h2 className="text-sm font-semibold uppercase tracking-[0.18em] text-navy border-b-2 border-teal/50 pb-1 inline-block">
-              Urology Practices by City in {stateName}
+              Salons by City in {stateName}
             </h2>
             <p className="mt-1 max-w-2xl text-sm text-slate-600">
-              Choose a city to browse urologists, urology clinics, and urological surgeons in{" "}
-              {stateName}, including general urology and pediatric urology options.
+              Choose a city to browse hair salons, beauty salons, and stylists in{" "}
+              {stateName}, including cuts, color, extensions, and specialty hair care.
             </p>
           </div>
           <div className="text-xs text-slate-500">
@@ -300,8 +289,8 @@ export default async function StatePage({ params }: StatePageProps) {
 
         {cities.length === 0 ? (
           <p className="text-sm text-slate-600">
-            We don&apos;t have practices listed for {stateName} yet. As new data
-            becomes available, cities and practices will appear here.
+            We don&apos;t have salons listed for {stateName} yet. As new data
+            becomes available, cities and listings will appear here.
           </p>
         ) : (
           <div className="mt-4 grid gap-3 sm:grid-cols-2 md:grid-cols-3">
@@ -315,7 +304,7 @@ export default async function StatePage({ params }: StatePageProps) {
                   <span className="font-medium">{city.cityName}</span>
                   <span className="text-xs text-slate-600 group-hover:text-navy/85">
                     {city.facilityCount.toLocaleString()}{" "}
-                    {city.facilityCount === 1 ? "practice" : "practices"}
+                    {city.facilityCount === 1 ? "salon" : "salons"}
                   </span>
                 </div>
                 {city.averageRating ? (

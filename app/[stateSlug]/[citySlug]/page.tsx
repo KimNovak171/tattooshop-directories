@@ -8,8 +8,9 @@ import {
   getHreflangForRegionSlug,
   getOtherCitiesInState,
 } from "@/lib/stateFacilities";
+import { salonCategorySchemaThings } from "@/lib/careTypesProse";
 
-const siteUrl = "https://urologistdirectories.com";
+const siteUrl = "https://hairsalondirectories.com";
 
 type CityPageProps = {
   params: Promise<{ stateSlug: string; citySlug: string }>;
@@ -28,8 +29,8 @@ export async function generateMetadata({
   const { stateName, cityName, facilities: cityFacilities } =
     await getCityFacilities(safeState, safeCity);
   const count = Array.isArray(cityFacilities) ? cityFacilities.length : 0;
-  const title = `Urologists in ${cityName}, ${stateName} | Urologist Directories`;
-  const description = `Find trusted urologists and urology care in ${cityName}, ${stateName}—browse ${count.toLocaleString()} verified practices with contact details, maps, and Google ratings so you can choose with confidence.`;
+  const title = `Hair Salons in ${cityName}, ${stateName} | Hair Salon Directories`;
+  const description = `Find trusted hair salons and stylists in ${cityName}, ${stateName}—browse ${count.toLocaleString()} verified listings with contact details, maps, and Google ratings so you can choose with confidence.`;
 
   return {
     title,
@@ -44,14 +45,14 @@ export async function generateMetadata({
       title,
       description,
       url: canonicalPath,
-      siteName: "UrologistDirectories.com",
+      siteName: "HairSalonDirectories.com",
       type: "website",
       images: [
         {
           url: "/og-image.svg",
           width: 1200,
           height: 630,
-          alt: `${cityName}, ${stateName} urologist directory preview`,
+          alt: `${cityName}, ${stateName} hair salon directory preview`,
         },
       ],
     },
@@ -108,7 +109,7 @@ export default async function CityPage({ params }: CityPageProps) {
       {
         "@type": "ListItem",
         position: 1,
-        name: "UrologistDirectories.com",
+        name: "HairSalonDirectories.com",
         item: `${siteUrl}/`,
       },
       {
@@ -129,38 +130,23 @@ export default async function CityPage({ params }: CityPageProps) {
   const webpageSchema = {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    name: `Urologists in ${cityName}, ${stateName}`,
+    name: `Hair Salons in ${cityName}, ${stateName}`,
     url: `${siteUrl}/${stateSlugNorm}/${citySlugNorm}`,
     isPartOf: {
       "@type": "WebSite",
-      name: "UrologistDirectories.com",
+      name: "HairSalonDirectories.com",
       url: `${siteUrl}/`,
     },
     about: [
       {
         "@type": "Thing",
-        name: `${cityName} urology practices`,
+        name: `${cityName} hair salons`,
       },
       {
         "@type": "Thing",
-        name: `${stateName} urologists`,
+        name: `${stateName} salon listings`,
       },
-      {
-        "@type": "Thing",
-        name: "General urology",
-      },
-      {
-        "@type": "Thing",
-        name: "Pediatric urology",
-      },
-      {
-        "@type": "Thing",
-        name: "Urological surgery",
-      },
-      {
-        "@type": "Thing",
-        name: "Urology clinics",
-      },
+      ...salonCategorySchemaThings(),
     ],
     speakable: {
       "@type": "SpeakableSpecification",
@@ -180,19 +166,19 @@ export default async function CityPage({ params }: CityPageProps) {
       />
       <header className="space-y-4">
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-teal">
-          Urologists by city
+          Salons by city
         </p>
         <h1 className="text-3xl font-semibold text-navy">
-          Urologists in {cityName}, {stateName}
+          Hair Salons in {cityName}, {stateName}
         </h1>
         <p className="max-w-2xl text-sm text-slate-600">
-          {cityName} has {facilities.length.toLocaleString()} verified urology
-          practices {careTypesClause}. Browse all options below, each with
+          {cityName} has {facilities.length.toLocaleString()} verified salon
+          listings {careTypesClause}. Browse all options below, each with
           Google Maps profile links and ratings data where available.
         </p>
         <p className="max-w-2xl text-sm text-slate-600">
-          Compare practices side by side, review services and contact details,
-          and find the right urologist or urology clinic for you in{" "}
+          Compare salons side by side, review services and contact details,
+          and find the right stylist or salon for you in{" "}
           {stateName}.
         </p>
       </header>
@@ -223,13 +209,13 @@ export default async function CityPage({ params }: CityPageProps) {
 
       <section className="mt-8 space-y-4">
         <h2 className="text-sm font-semibold uppercase tracking-[0.18em] text-navy">
-          Practices in {cityName}
+          Salons in {cityName}
         </h2>
 
         {facilities.length === 0 ? (
           <p className="text-sm text-slate-600">
-            We don&apos;t have practices listed for {cityName}, {stateName} yet.
-            As new data becomes available, practices will appear here.
+            We don&apos;t have salons listed for {cityName}, {stateName} yet.
+            As new data becomes available, listings will appear here.
           </p>
         ) : (
           <div className="grid gap-4 md:grid-cols-2">
@@ -261,7 +247,7 @@ export default async function CityPage({ params }: CityPageProps) {
                 <p className="font-medium">{city.cityName}</p>
                 <p className="text-xs text-slate-600">
                   {city.facilityCount.toLocaleString()}{" "}
-                  {city.facilityCount === 1 ? "practice" : "practices"}
+                  {city.facilityCount === 1 ? "salon" : "salons"}
                 </p>
               </Link>
             ))}

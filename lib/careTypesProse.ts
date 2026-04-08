@@ -1,22 +1,24 @@
 /**
  * Turn raw Google-style category labels into short, natural phrases for prose
- * (e.g. city page intros). Omits entries that do not look urology-related.
+ * (e.g. city page intros). Omits entries that do not look hair-salon-related.
  */
 
 const EXACT_PHRASE: Record<string, string> = {
-  urologist: "urologists",
-  "urology clinic": "urology clinics",
-  "pediatric urologist": "pediatric urologists",
-  "urological surgeon": "urological surgeons",
-  "urology physician": "urology physicians",
-  urology: "urology services",
+  "hair salon": "hair salons",
+  "beauty salon": "beauty salons",
+  hairdresser: "hairdressers",
+  "hair extension technician": "hair extension technicians",
+  "hair replacement service": "hair replacement services",
+  "loctician service": "loctician services",
+  "hair care service": "hair care services",
 };
 
-const UROLOGY_LIKE = /urolog/i;
+const HAIR_SALON_LIKE =
+  /hair|salon|beauty|dresser|loctician|extension|replacement|barbershop|barber shop|stylist/i;
 
-/** Labels that match common noise but are not healthcare services. */
-const NON_UROLOGY =
-  /auto\s+repair|collision|transmission|student\s+dormitory|orthodox\s+church|storage\s+facility|insurance\s+agency/i;
+/** Labels that match common noise but are not salon or hair services. */
+const NON_SALON =
+  /auto\s+repair|collision|transmission|student\s+dormitory|orthodox\s+church|storage\s+facility|insurance\s+agency|urolog/i;
 
 function normalizeKey(raw: string): string {
   return raw.trim().toLowerCase().replace(/\s+/g, " ");
@@ -35,7 +37,7 @@ function humanizeFallback(raw: string): string {
   if (s.endsWith(" center")) {
     return s.replace(/ center$/, " centers");
   }
-  if (s.endsWith("ist") && !/urologist$/.test(s)) {
+  if (s.endsWith("ist") && !/hairdresser$/.test(s)) {
     return `${s}s`;
   }
   if (!s.endsWith("s")) {
@@ -47,9 +49,9 @@ function humanizeFallback(raw: string): string {
 function phraseForLabel(raw: string): string | null {
   const key = normalizeKey(raw);
   if (!key) return null;
-  if (NON_UROLOGY.test(key)) return null;
+  if (NON_SALON.test(key)) return null;
   if (EXACT_PHRASE[key]) return EXACT_PHRASE[key];
-  if (!UROLOGY_LIKE.test(raw)) return null;
+  if (!HAIR_SALON_LIKE.test(raw)) return null;
   return humanizeFallback(raw);
 }
 
@@ -78,7 +80,24 @@ export function formatCareTypesClause(
     if (phrases.length >= maxItems) break;
   }
   if (phrases.length === 0) {
-    return "including urologists, urology clinics, pediatric urologists, and urological surgeons";
+    return "including hair salons, beauty salons, hairdressers, hair extension technicians, hair replacement services, loctician services, and hair care services";
   }
   return `including ${oxfordJoin(phrases)}`;
 }
+
+/** Schema.org `Thing` entries for primary salon service categories on this directory. */
+export function salonCategorySchemaThings(): { "@type": "Thing"; name: string }[] {
+  return [
+    { "@type": "Thing", name: "Hair Salon" },
+    { "@type": "Thing", name: "Beauty Salon" },
+    { "@type": "Thing", name: "Hairdresser" },
+    { "@type": "Thing", name: "Hair Extension Technician" },
+    { "@type": "Thing", name: "Hair Replacement Service" },
+    { "@type": "Thing", name: "Loctician Service" },
+    { "@type": "Thing", name: "Hair Care Service" },
+  ];
+}
+
+/** Default sentence when no care-type stats exist (FAQ answers, etc.). */
+export const DEFAULT_SALON_CARE_TYPES_SENTENCE =
+  "Hair Salon, Beauty Salon, Hairdresser, Hair Extension Technician, Hair Replacement Service, Loctician Service, Hair Care Service";

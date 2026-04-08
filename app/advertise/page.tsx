@@ -2,34 +2,34 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Advertise | Get Your Urology Practice in Front of Patients",
+  title: "Advertise | Get Your Salon in Front of Clients",
   description:
-    "Featured and premium listings on UrologistDirectories.com. Reach patients actively searching for urologists, urology clinics, and urological surgeons across the United States.",
+    "Featured and premium listings on HairSalonDirectories.com. Reach clients actively searching for hair salons, beauty salons, stylists, and hair care services across the United States.",
   alternates: {
     canonical: "/advertise",
     languages: {
-      "en-us": "https://urologistdirectories.com/advertise",
+      "en-us": "https://hairsalondirectories.com/advertise",
     },
   },
   openGraph: {
-    title: "Advertise | Get Your Urology Practice in Front of Patients",
+    title: "Advertise | Get Your Salon in Front of Clients",
     description:
-      "A featured listing puts your practice at the top of your city directory section and in front of high-intent visitors at the moment they are choosing a urologist or urology clinic.",
+      "A featured listing puts your salon at the top of your city directory section and in front of high-intent visitors at the moment they are choosing a stylist or salon.",
     url: "/advertise",
-    siteName: "UrologistDirectories.com",
+    siteName: "HairSalonDirectories.com",
     type: "website",
     images: [
       {
         url: "/og-image.svg",
         width: 1200,
         height: 630,
-        alt: "UrologistDirectories.com advertise page preview",
+        alt: "HairSalonDirectories.com advertise page preview",
       },
     ],
   },
 };
 
-const siteUrl = "https://urologistdirectories.com";
+const siteUrl = "https://hairsalondirectories.com";
 const STRIPE_LINK_49 = "https://buy.stripe.com/aFa4gz5I66zB7W6g5XfAc0w";
 const STRIPE_LINK_99 = "https://buy.stripe.com/bJe6oH3zY2jl1xIbPHfAc0x";
 
@@ -41,7 +41,7 @@ export default function AdvertisePage() {
       {
         "@type": "ListItem",
         position: 1,
-        name: "UrologistDirectories.com",
+        name: "HairSalonDirectories.com",
         item: `${siteUrl}/`,
       },
       {
@@ -62,16 +62,16 @@ export default function AdvertisePage() {
 
       <header className="space-y-3">
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-teal">
-          For Urology Practice Owners
+          For Salon Owners
         </p>
         <h1 className="text-3xl font-semibold text-navy sm:text-4xl">
-          Get Your Practice in Front of Patients Who Are Ready to Choose
+          Get Your Salon in Front of Clients Who Are Ready to Book
         </h1>
         <p className="max-w-3xl text-sm text-slate-600">
-          UrologistDirectories.com is visited by patients actively searching for
-          urologists and urology care across the United States. A featured listing puts
-          your practice at the top of your city directory section and in front of
-          high-intent visitors at the moment they are choosing a urologist or specialist.
+          HairSalonDirectories.com is visited by clients actively searching for
+          hair salons and beauty services across the United States. A featured listing puts
+          your salon at the top of your city directory section and in front of
+          high-intent visitors at the moment they are choosing a stylist or salon.
         </p>
       </header>
 
@@ -101,8 +101,8 @@ export default function AdvertisePage() {
           </h2>
           <ul className="mt-4 list-disc space-y-2 pl-5 text-sm text-slate-600">
             <li>Everything in Featured</li>
-            <li>Included in the Featured Urology Practices section on the homepage</li>
-            <li>Your practice logo or photo displayed</li>
+            <li>Included in the Featured Salons section on the homepage</li>
+            <li>Your salon logo or photo displayed</li>
             <li>Custom tagline (up to 60 words)</li>
             <li>Cancel anytime</li>
           </ul>

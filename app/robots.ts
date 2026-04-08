@@ -8,7 +8,7 @@ export default function robots(): MetadataRoute.Robots {
         allow: "/",
       },
     ],
-    sitemap: "https://urologistdirectories.com/sitemap.xml",
+    sitemap: "https://hairsalondirectories.com/sitemap.xml",
   };
 }
 

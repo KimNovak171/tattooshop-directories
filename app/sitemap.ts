@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { getCanadaDirectoryIndex } from "@/lib/canadaFacilities";
 import { getDirectoryIndex } from "@/lib/stateFacilities";
 
-const siteUrl = "https://urologistdirectories.com";
+const siteUrl = "https://hairsalondirectories.com";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();

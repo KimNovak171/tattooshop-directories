@@ -3,33 +3,33 @@ import Link from "next/link";
 import { ContactForm } from "./ContactForm";
 
 export const metadata: Metadata = {
-  title: "Contact Us | Urologist Directories",
+  title: "Contact Us | Hair Salon Directories",
   description:
-    "Get in touch with UrologistDirectories.com. Send a message or email hello@directoriesnetwork.com for questions about our directory or featured listings.",
+    "Get in touch with HairSalonDirectories.com. Send a message or email hello@directoriesnetwork.com for questions about our directory or featured listings.",
   alternates: {
     canonical: "/contact",
     languages: {
-      "en-us": "https://urologistdirectories.com/contact",
+      "en-us": "https://hairsalondirectories.com/contact",
     },
   },
   openGraph: {
-    title: "Contact Us | Urologist Directories",
+    title: "Contact Us | Hair Salon Directories",
     description:
-      "Contact UrologistDirectories.com for questions about our directory or featured listings.",
+      "Contact HairSalonDirectories.com for questions about our directory or featured listings.",
     url: "/contact",
-    siteName: "UrologistDirectories.com",
+    siteName: "HairSalonDirectories.com",
     type: "website",
   },
 };
 
-const siteUrl = "https://urologistdirectories.com";
+const siteUrl = "https://hairsalondirectories.com";
 
 export default function ContactPage() {
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "UrologistDirectories.com", item: `${siteUrl}/` },
+      { "@type": "ListItem", position: 1, name: "HairSalonDirectories.com", item: `${siteUrl}/` },
       { "@type": "ListItem", position: 2, name: "Contact", item: `${siteUrl}/contact` },
     ],
   };

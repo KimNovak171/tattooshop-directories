@@ -549,7 +549,7 @@ export function getGlobalStats(): GlobalStats {
 
 export function getStateResourcesUrl(stateSlug: string): string {
   void stateSlug;
-  return "https://www.auanet.org";
+  return "https://www.probeauty.org";
 }
 
 export function getHreflangForRegionSlug(
