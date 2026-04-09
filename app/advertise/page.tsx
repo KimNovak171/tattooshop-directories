@@ -30,8 +30,8 @@ export const metadata: Metadata = {
 };
 
 const siteUrl = "https://tattooshopdirectories.com";
-const STRIPE_LINK_49 = "https://buy.stripe.com/cNi4gzfiG9LNfoycTLfAc0A";
-const STRIPE_LINK_99 = "https://buy.stripe.com/5kQ7sL2vU7DF0tE06ZfAc0B";
+const STRIPE_LINK_49 = "https://buy.stripe.com/9B63cvb2qcXZdgq2f7fAc0G";
+const STRIPE_LINK_99 = "https://buy.stripe.com/3cI5kD6Ma1fha4e06ZfAc0H";
 
 export default function AdvertisePage() {
   const breadcrumbSchema = {
